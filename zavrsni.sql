@@ -1,5 +1,5 @@
 # 
-
+# C:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 <C:\Users\Bikan\Desktop\Završni\Zavrsni\zavrsni.sql
 
 drop database if exists zavrsni;
 create database zavrsni default charset utf8mb4;
@@ -64,3 +64,16 @@ create table kategorija(
   alter table trgovina add foreign key (narudzba) references narudzba(sifra);  
    alter table naruceni_proizvodi add foreign key (proizvodi) references proizvodi(sifra);  
     alter table kategorija add foreign key (proizvodi) references proizvodi(sifra);
+
+insert into kupac(sifra,ime,prezime,broj_mobitela,email,ulica,grad,drzava)
+values(null,Ivan,Ivanušec,0982321232,ivani@gmail.com,KraljaTomislava,Đakovo,Hrvatska),
+insert into kupac(sifra,ime,prezime,broj_mobitela,email,ulica,grad,drzava)
+values(null,Mario,Ivušić,0932921252,marioi@gmail.com,Frankopanska,Đakovo,Hrvatska),
+insert into kupac(sifra,ime,prezime,broj_mobitela,email,ulica,grad,drzava)
+values(null,Leon,Stanušec,091235788,leon@gmail.com,Vukovarska,osijek,Hrvatska),
+insert into kupac(sifra,ime,prezime,broj_mobitela,email,ulica,grad,drzava)
+values(null,Petar,Sušić,097666777,peros@gmail.com,Divaltova,Osijek,Hrvatska),
+insert into kupac(sifra,ime,prezime,broj_mobitela,email,ulica,grad,drzava)
+values(null,Krešimir,Drogba,09823227232,kredro@gmail.com,Omladinska,Viškovci,Hrvatska),
+insert into kupac(sifra,ime,prezime,broj_mobitela,email,ulica,grad,drzava)
+values(null,Stjepan,Petković,0992229932,stjep@gmail.com,KraljaTomislava,Viškovci,Hrvatska),
