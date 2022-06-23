@@ -76,4 +76,4 @@ values(null,Petar,Sušić,097666777,peros@gmail.com,Divaltova,Osijek,Hrvatska),
 insert into kupac(sifra,ime,prezime,broj_mobitela,email,ulica,grad,drzava)
 values(null,Krešimir,Drogba,09823227232,kredro@gmail.com,Omladinska,Viškovci,Hrvatska),
 insert into kupac(sifra,ime,prezime,broj_mobitela,email,ulica,grad,drzava)
-values(null,Stjepan,Petković,0992229932,stjep@gmail.com,KraljaTomislava,Viškovci,Hrvatska),
+values(null,Stjepan,Petković,0992229932,stjep@gmail.com,KraljaTomislava,Viškovci,Hrvatska);
