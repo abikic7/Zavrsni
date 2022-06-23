@@ -66,14 +66,9 @@ create table kategorija(
     alter table kategorija add foreign key (proizvodi) references proizvodi(sifra);
 
 insert into kupac(sifra,ime,prezime,broj_mobitela,email,ulica,grad,drzava)
-values(null,Ivan,Ivanušec,0982321232,ivani@gmail.com,KraljaTomislava,Đakovo,Hrvatska),
-insert into kupac(sifra,ime,prezime,broj_mobitela,email,ulica,grad,drzava)
-values(null,Mario,Ivušić,0932921252,marioi@gmail.com,Frankopanska,Đakovo,Hrvatska),
-insert into kupac(sifra,ime,prezime,broj_mobitela,email,ulica,grad,drzava)
-values(null,Leon,Stanušec,091235788,leon@gmail.com,Vukovarska,osijek,Hrvatska),
-insert into kupac(sifra,ime,prezime,broj_mobitela,email,ulica,grad,drzava)
-values(null,Petar,Sušić,097666777,peros@gmail.com,Divaltova,Osijek,Hrvatska),
-insert into kupac(sifra,ime,prezime,broj_mobitela,email,ulica,grad,drzava)
-values(null,Krešimir,Drogba,09823227232,kredro@gmail.com,Omladinska,Viškovci,Hrvatska),
-insert into kupac(sifra,ime,prezime,broj_mobitela,email,ulica,grad,drzava)
-values(null,Stjepan,Petković,0992229932,stjep@gmail.com,KraljaTomislava,Viškovci,Hrvatska);
+values (null,Ivan,Ivanušec,0982321232,ivani@gmail.com,KraljaTomislava,Đakovo,Hrvatska),
+ (null,Mario,Ivušić,0932921252,marioi@gmail.com,Frankopanska,Đakovo,Hrvatska),
+ (null,Leon,Stanušec,091235788,leon@gmail.com,Vukovarska,osijek,Hrvatska),
+ (null,Petar,Sušić,097666777,peros@gmail.com,Divaltova,Osijek,Hrvatska),
+ (null,Krešimir,Drogba,09823227232,kredro@gmail.com,Omladinska,Viškovci,Hrvatska),
+ (null,Stjepan,Petković,0992229932,stjep@gmail.com,KraljaTomislava,Viškovci,Hrvatska);
