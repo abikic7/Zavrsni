@@ -5,7 +5,7 @@ class App
     public static function start()
     {
         // echo 'Hello from App::start';
-        $ruta = Request::getRuta();
+             $ruta = Request::getRuta();
 
         $dijelovi = explode('/', $ruta);
 
