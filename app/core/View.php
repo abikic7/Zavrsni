@@ -15,7 +15,7 @@ class View
         $viewDatoteka = BP_APP . 'view' . 
         DIRECTORY_SEPARATOR . $phtmlStranica . '.phtml';
         ob_start();
-        extract($parametri); // ključeve asocijativnog niza pretbara u varijable
+        extract($parametri); 
             
         if(file_exists($viewDatoteka)){
             include_once $viewDatoteka;
