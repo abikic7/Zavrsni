@@ -1,5 +1,12 @@
-# 
-# C:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 <C:\Users\Bikan\Desktop\Završni\Zavrsni\zavrsni.sql
+# C:\xampp\mysql\bin\mysql -uroot --default_character_set=utf8 < C:\Users\Bikan\Desktop\Zavrsni\fanshop.hr\zavrsni.sql
+
+# davanje ovlasti korisnik edunova lozinka edunova
+#grant all privileges
+#on zavrsni.*
+#to 'edunova'@'localhost'
+#identified by 'edunova';
+
+alter database hiperion_zavrsni character set utf8mb4;
 
 drop database if exists zavrsni;
 create database zavrsni default charset utf8mb4;
@@ -13,77 +20,7 @@ create table operater(
     prezime varchar(50) not null,
     uloga varchar(20) not null
 );
-
-
-create table kupac(
-    sifra int not null primary key auto_increment,
-    ime varchar(50) not null,
-    prezime varchar(50)not null,
-    broj_mobitela int,
-    email varchar(100),
-    ulica varchar(50),
-    grad varchar(50),
-    drzava varchar(50)
-
-);
-
-create table košarica(
-    sifra int not null primary key auto_increment,
-    kupac int,
-    status_narudzbe varchar(50),
-    datum_isporuke datetime,
-    naruceni_proizvodi int not null
-    
-);
- 
-create table naruceni_proizvodi(
-    sifra int not null primary key auto_increment,
-    proizvodi int not null,
-    cijena decimal(18,2),
-    poštarina decimal(18,2),
-    dostava varchar(50),
-    naziv_proizvoda varchar(50)
-    
-    
-);
-
-create table proizvodi(
-    sifra int not null primary key auto_increment,
-    naziv_proizvoda varchar(50),
-    marka varchar(50),
-    cijena decimal(18,2)
-);
-
-create table kategorija(
-    sifra int not null primary key auto_increment,
-    proizvodi int not null,
-    vrsta varchar(50)
-);
-
- create table trgovina(
-    sifra int not null primary key auto_increment,
-    naziv varchar(50) not null,
-    broj_mobitela int,
-    adresa varchar(50),
-    email varchar(100),
-    narudzba int 
- );
-      
- alter table košarica add foreign key (kupac) references kupac(sifra);
-  alter table košarica add foreign key (naruceni_proizvodi) references naruceni_proizvodi(sifra);
-  alter table trgovina add foreign key (košarica) references košarica(sifra);  
-   alter table naruceni_proizvodi add foreign key (proizvodi) references proizvodi(sifra);  
-    alter table kategorija add foreign key (proizvodi) references proizvodi(sifra);
-
-insert into kupac(sifra,ime,prezime,broj_mobitela,email,ulica,grad,drzava)
-values (null,'Ivan','Ivanušec',0982321232,'ivani@gmail.com','KraljaTomislava','Đakovo','Hrvatska'),
- (null,'Mario','Ivušić',0932921252,'marioi@gmail.com','Frankopanska','Đakovo','Hrvatska'),
- (null,'Leon','Stanušec',091235788,'leon@gmail.com','Vukovarska','osijek','Hrvatska'),
- (null,'Petar','Sušić',097666777,'peros@gmail.com','Divaltova','Osijek','Hrvatska'),
- (null,'Krešimir','Drogba',09823227232,'kredro@gmail.com','Omladinska','Viškovci','Hrvatska'),
- (null,'Stjepan','Petković',0992229932,'stjep@gmail.com','KraljaTomislava','Viškovci','Hrvatska');
-
- # admin a, oper o
+# admin a, oper o
 insert into operater(email,lozinka,ime,prezime,uloga)
 values
 ('admin@edunova.hr','$2a$12$QtSIcQh6FDW04CBBpuO68Oms8RwMAeVSjHgj1zOeR1.T6oMIdvbkS',
@@ -92,10 +29,222 @@ values
     'Edunova', 'Operater','oper');
 
 
-insert into košarica(sifra,kupac,status_narudzbe,datum_isporuke,naruceni_proizvodi);
-values
+create table klub(
+    sifra int not null primary key auto_increment,
+    ime_kluba varchar(50),
+    stadion varchar(50)
+);
+
+create table igrac(
+    sifra int not null primary key auto_increment,
+    klub int not null,
+    ime varchar(50) ,
+    prezime varchar(50)
+   
+);
+
+    
 
 
-insert into naruceni_proizvodi(sifra,proizvodi,cijena,poštarina,dostava,naziv_proizvoda)
-values(1,1,1,1,1,1 );
+create table Kupac(
+    sifra int not null primary key auto_increment,
+    ime varchar(50)not null, 
+    prezime varchar(50)not null,
+    email varchar(50)not null
 
+);
+
+create table oprema (
+    sifra int not null primary key auto_increment,
+    igrac int not null,
+    boja varchar(50),
+    velicina varchar(50),
+    cijena decimal(18,2),
+    vrsta_proizvoda varchar(50) 
+    
+    
+    
+);
+
+create table naruceni_proizvodi (
+    sifra int not null primary key auto_increment,
+    kosarica int not null,
+    kupac int not null
+    
+);
+
+
+    
+create table kosarica(
+    sifra int not null primary key auto_increment,
+    oprema int not null,
+    ukupna_cijena_proizvoda decimal(18,5) not null,
+    datum_isporuke datetime,
+    kolicina_opreme int
+
+
+);
+
+
+
+
+# definiranje vanjskih ključeva
+alter table igrac add foreign key (klub) references klub(sifra);
+alter table kosarica add foreign key (oprema) references oprema(sifra);
+alter table naruceni_proizvodi add foreign key (kosarica) references kosarica(sifra);
+alter table naruceni_proizvodi add foreign key (kupac) references kupac(sifra);
+alter table oprema add foreign key (igrac) references igrac(sifra);
+
+insert into klub (sifra, ime_kluba,stadion)
+ values (null,'GNK Dinamo Zagreb','Maksimir'),                  
+        (null,'HNK Hajduk Split', 'Poljud'),             
+        (null,'NK Osijek', 'Gradski vrt'), 
+        (null,'HNK Gorica', 'Gradski stadion Velika Gorica'), 
+        (null,'NK Istra', 'Stadion Aldo Drosina'), 
+        (null,'HNK Rijeka', 'Rujevica'),
+        (null,'NK Lokomotiva', 'Kranjčevićeva'), 
+        (null,'HNK Šibenik', 'Šubićevac'), 
+        (null,'NK Slaven-Belupo', 'Gradski stadion Koprivnica'), 
+        (null,'NK Varaždin', 'Stadion Varteks');
+
+
+
+    insert into igrac ( sifra, ime, prezime, klub)
+        values           
+        (null,'Bruno', 'Petković', 1 ),
+        (null,'Mislav', 'Oršić', 1 ),
+        (null,'Arijan', 'Ademi', 1 ),
+        (null,'Dominik', 'Livaković', 1 ),
+        (null,'Marko', 'Livaja', 2 ),
+        (null,'Lovre', 'Kalinić', 2 ),
+        (null,'Stipe', 'Biuk', 2 ),
+        (null,'Nikola', 'Kalinić', 2 ),
+        (null,'Ivica', 'Ivušić', 3 ),
+        (null,'Mile', 'Škorić', 3 ),
+        (null,'Oslo', 'Kleinheishler', 3 ),
+        (null,'Josip', 'Mitrović', 4 ),
+        (null,'Toni', 'Fruk', 4 ),
+        (null,'Deni', 'Jurić', 4 ),
+        (null,'Lovro', 'Majkić', 5 ),
+        (null,'Luka', 'Bradarić', 5 ),
+        (null,'Luka', 'Marin', 5 ),
+        (null,'Nediljko', 'Labrović', 6 ),
+        (null,'Matej', 'Mitrović', 6 ),
+        (null,'Mario', 'Vrančić', 6 ),
+        (null,'Nikola', 'Čavlina', 7 ),
+        (null,'Josip', 'Pivarić', 7 ),
+        (null,'Ibrahim', 'Aliyu', 7 ),
+        (null,'Lovre', 'Logić', 8 ),
+        (null,'Mislav', 'Matić', 8 ),
+        (null,'Josip', 'Kvesić', 8 ),
+        (null,'Duje', 'Čop', 8 ),
+        (null,'Antun', 'Marković', 9 ),
+        (null,'Vinko', 'Soldo', 9 ),
+        (null,'Ivan', 'Krstanović', 9 ),
+        (null,'Marino', 'Bulat', 10 ),
+        (null,'Filip', 'Brekalo', 10 ),
+        (null,'Fran', 'Brodić', 10 );
+
+
+insert into oprema (sifra,vrsta_proizvoda,igrac, boja,velicina, cijena )
+values 
+(null,'Dres', 1, 'Plavi', 'XL', 699.99),
+ (null,'Dres', 1, 'Plavi', 'M', 699.99),
+ (null,'Dres', 1, 'Plavi', 'L', 699.99),
+ (null,'Dres', 1, 'Plavi', 'S', 699.99),
+ (null,'Dres', 2, 'Bijeli', 'M', 599.99),
+ (null,'Dres', 2, 'Bijeli', 'XL', 599.99),
+ (null,'Dres', 2, 'Bijeli', 'S', 599.99),
+ (null,'Dres', 2, 'Bijeli', 'L', 599.99),
+ (null,'Dres', 3, 'Bijelo-plavi', 'M', 599.99),
+ (null,'Dres', 3, 'Bijelo-plavi', 'L', 599.99),
+(null,'Dres', 3, 'Bijelo-plavi', 'S', 599.99),
+ (null,'Dres', 3, 'Bijelo-plavi', 'XL', 599.99),
+ (null,'Dres', 4, 'Crveni', 'L', 549.99),
+ (null,'Dres', 4, 'Crveni', 'XL', 549.99),
+ (null,'Dres', 4, 'Crveni', 'S', 549.99),
+ (null,'Dres', 4, 'Crveni', 'M', 549.99),
+ (null,'Dres', 5, 'Žuti', 'XL', 549.99),
+ (null,'Dres', 5, 'Žuti', 'M', 549.99),
+ (null,'Dres', 5, 'Žuti', 'S', 549.99),
+ (null,'Dres', 5, 'Žuti', 'L', 549.99),
+ (null,'Dres', 6, 'Bijeli', 'L', 249.99),
+ (null,'Dres', 6, 'Bijeli', 'M', 249.99),
+ (null,'Dres', 6, 'Bijeli', 'S', 249.99),
+ (null,'Dres', 6, 'Bijeli', 'XL', 249.99),
+ (null,'Dres', 7, 'Crno-bijeli', 'L', 209.99),
+ (null,'Dres', 7, 'Crno-bijeli', 'XL', 209.99),
+ (null,'Dres', 7, 'Crno-bijeli', 'M', 209.99),
+ (null,'Dres', 7, 'Crno-bijeli', 'S', 209.99),
+ (null,'Dres', 8, 'Narančasti', 'S', 509.99),
+ (null,'Dres', 8, 'Narančasti', 'M', 509.99),
+ (null,'Dres', 8, 'Narančasti', 'L', 509.99),
+ (null,'Dres', 8, 'Narančasti', 'XL', 509.99),
+ (null,'Dres', 9, 'Crni', 'XL', 429.99),
+ (null,'Dres', 9, 'Crni', 'L', 429.99),
+ (null,'Dres', 9, 'Crni', 'M', 429.99),
+ (null,'Dres', 9, 'Crni', 'S', 429.99),
+ (null,'Dres', 10, 'Bijelo-plavi', 'S', 178.99),
+ (null,'Dres', 10, 'Bijelo-plavi', 'M', 178.99),
+ (null,'Dres', 10, 'Bijelo-plavi', 'L', 178.99),
+ (null,'Dres', 10, 'Bijelo-plavi', 'XL', 178.99),
+ (null,'Hlačice', 1, 'Plavi', 'XL', 299.99),
+ (null,'Hlačice', 1, 'Plavi', 'M', 299.99),
+ (null,'Hlačice', 1, 'Plavi', 'L', 299.99),
+ (null,'Hlačice', 1, 'Plavi', 'S', 299.99),
+ (null,'Hlačice', 2, 'Bijeli', 'M', 199.99),
+ (null,'Hlačice', 2, 'Bijeli', 'XL', 199.99),
+ (null,'Hlačice', 2, 'Bijeli', 'S', 199.99),
+ (null,'Hlačice', 2, 'Bijeli', 'L', 199.99),
+ (null,'Hlačice', 3, 'Bijelo-plavi', 'M', 199.99),
+ (null,'Hlačice', 3, 'Bijelo-plavi', 'L', 199.99),
+(null,'Hlačice', 3, 'Bijelo-plavi', 'S', 199.99),
+ (null,'Hlačice', 3, 'Bijelo-plavi', 'XL', 199.99),
+ (null,'Hlačice', 4, 'Crveni', 'L', 349.99),
+ (null,'Hlačice', 4, 'Crveni', 'XL', 349.99),
+ (null,'Hlačice', 4, 'Crveni', 'S', 349.99),
+ (null,'Hlačice', 4, 'Crveni', 'M', 349.99),
+ (null,'Hlačice', 5, 'Žuti', 'XL', 49.99),
+ (null,'Hlačice', 5, 'Žuti', 'M', 49.99),
+ (null,'Hlačice', 5, 'Žuti', 'S', 49.99),
+ (null,'Hlačice', 5, 'Žuti', 'L', 49.99),
+ (null,'Hlačice', 6, 'Bijeli', 'L', 249.99),
+ (null,'Hlačice', 6, 'Bijeli', 'M', 249.99),
+ (null,'Hlačice', 6, 'Bijeli', 'S', 249.99),
+ (null,'Hlačice', 6, 'Bijeli', 'XL', 249.99),
+ (null,'Hlačice', 7, 'Crno-bijeli', 'L', 109.99),
+ (null,'Hlačice', 7, 'Crno-bijeli', 'XL', 109.99),
+ (null,'Hlačice', 7, 'Crno-bijeli', 'M', 109.99),
+ (null,'Hlačice', 7, 'Crno-bijeli', 'S', 109.99),
+ (null,'Hlačice', 8, 'Narančasti', 'S', 209.99),
+ (null,'Hlačice', 8, 'Narančasti', 'M', 209.99),
+ (null,'Hlačice', 8, 'Narančasti', 'L', 209.99),
+ (null,'Hlačice', 8, 'Narančasti', 'XL', 209.99),
+ (null,'Hlačice', 9, 'Crni', 'XL', 129.99),
+ (null,'Hlačice', 9, 'Crni', 'L', 129.99),
+ (null,'Hlačice', 9, 'Crni', 'M', 129.99),
+ (null,'Hlačice', 9, 'Crni', 'S', 129.99),
+ (null,'Hlačice', 10, 'Bijelo-plavi', 'S', 78.99),
+ (null,'Hlačice', 10, 'Bijelo-plavi', 'M', 78.99),
+ (null,'Hlačice', 10, 'Bijelo-plavi', 'L', 78.99),
+ (null,'Hlačice', 10, 'Bijelo-plavi', 'XL', 78.99);
+
+ 
+
+
+ insert into kupac(sifra,ime, prezime,email)
+values 
+(null,'Ante','Bikić','bikic.tm@gmail.com'),
+ (null,'Mario','Ivušić','marioi@gmail.com'),
+ (null,'Leon','Stanušec','leon@gmail.com'),
+ (null,'Petar','Sušić','peros@gmail.com'),
+ (null,'Krešimir','Drogba','kredro@gmail.com'),
+ (null,'Stjepan','Petković','stjep@gmail.com');
+
+
+
+ insert into kosarica(sifra,oprema, ukupna_cijena_proizvoda, datum_isporuke, kolicina_opreme)
+values(null,1,699.99,"2022-10-18 15:27:30", 2);
+                  
+insert into naruceni_proizvodi(sifra,kosarica ,kupac)
+values(1,1,1);
