@@ -5,6 +5,16 @@ drop database if exists zavrsni;
 create database zavrsni default charset utf8mb4;
 use zavrsni;
 
+create table operater(
+    sifra int not null primary key auto_increment,
+    email varchar(50) not null,
+    lozinka varchar(100) not null,
+    ime varchar(50) not null,
+    prezime varchar(50) not null,
+    uloga varchar(20) not null
+);
+
+
 create table kupac(
     sifra int not null primary key auto_increment,
     ime varchar(50) not null,
@@ -66,9 +76,17 @@ create table kategorija(
     alter table kategorija add foreign key (proizvodi) references proizvodi(sifra);
 
 insert into kupac(sifra,ime,prezime,broj_mobitela,email,ulica,grad,drzava)
-values (null,Ivan,Ivanušec,0982321232,ivani@gmail.com,KraljaTomislava,Đakovo,Hrvatska),
- (null,Mario,Ivušić,0932921252,marioi@gmail.com,Frankopanska,Đakovo,Hrvatska),
- (null,Leon,Stanušec,091235788,leon@gmail.com,Vukovarska,osijek,Hrvatska),
- (null,Petar,Sušić,097666777,peros@gmail.com,Divaltova,Osijek,Hrvatska),
- (null,Krešimir,Drogba,09823227232,kredro@gmail.com,Omladinska,Viškovci,Hrvatska),
- (null,Stjepan,Petković,0992229932,stjep@gmail.com,KraljaTomislava,Viškovci,Hrvatska);
+values (null,'Ivan','Ivanušec',0982321232,'ivani@gmail.com','KraljaTomislava','Đakovo','Hrvatska'),
+ (null,'Mario','Ivušić',0932921252,'marioi@gmail.com','Frankopanska','Đakovo','Hrvatska'),
+ (null,'Leon','Stanušec',091235788,'leon@gmail.com','Vukovarska','osijek','Hrvatska'),
+ (null,'Petar','Sušić',097666777,'peros@gmail.com','Divaltova','Osijek','Hrvatska'),
+ (null,'Krešimir','Drogba',09823227232,'kredro@gmail.com','Omladinska','Viškovci','Hrvatska'),
+ (null,'Stjepan','Petković',0992229932,'stjep@gmail.com','KraljaTomislava','Viškovci','Hrvatska');
+
+ # admin a, oper o
+insert into operater(email,lozinka,ime,prezime,uloga)
+values
+('admin@edunova.hr','$2a$12$QtSIcQh6FDW04CBBpuO68Oms8RwMAeVSjHgj1zOeR1.T6oMIdvbkS',
+    'Edunova','Administrator','admin'),
+('oper@edunova.hr','$2a$12$MIDZvMIUSNjaqTWLCYb9VuBcRttF.74Ehqbh9xBYrKQryFN68QTcO',
+    'Edunova', 'Operater','oper');
