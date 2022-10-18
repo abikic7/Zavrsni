@@ -27,7 +27,7 @@ create table kupac(
 
 );
 
-create table narudzba(
+create table košarica(
     sifra int not null primary key auto_increment,
     kupac int,
     status_narudzbe varchar(50),
@@ -69,9 +69,9 @@ create table kategorija(
     narudzba int 
  );
       
- alter table narudzba add foreign key (kupac) references kupac(sifra);
-  alter table narudzba add foreign key (naruceni_proizvodi) references naruceni_proizvodi(sifra);
-  alter table trgovina add foreign key (narudzba) references narudzba(sifra);  
+ alter table košarica add foreign key (kupac) references kupac(sifra);
+  alter table košarica add foreign key (naruceni_proizvodi) references naruceni_proizvodi(sifra);
+  alter table trgovina add foreign key (košarica) references košarica(sifra);  
    alter table naruceni_proizvodi add foreign key (proizvodi) references proizvodi(sifra);  
     alter table kategorija add foreign key (proizvodi) references proizvodi(sifra);
 
@@ -90,3 +90,12 @@ values
     'Edunova','Administrator','admin'),
 ('oper@edunova.hr','$2a$12$MIDZvMIUSNjaqTWLCYb9VuBcRttF.74Ehqbh9xBYrKQryFN68QTcO',
     'Edunova', 'Operater','oper');
+
+
+insert into košarica(sifra,kupac,status_narudzbe,datum_isporuke,naruceni_proizvodi);
+values
+
+
+insert into naruceni_proizvodi(sifra,proizvodi,cijena,poštarina,dostava,naziv_proizvoda)
+values(1,1,1,1,1,1 );
+
