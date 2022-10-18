@@ -9,7 +9,7 @@ if($dev){
         'nazivApp'=>'DEV fanshop App',
         'baza'=>[
             'server'=>'localhost',
-            'baza'=>'edunovapp25',
+            'baza'=>'zavrsni',
             'korisnik'=>'edunova',
             'lozinka'=>'edunova'
         ]

@@ -24,8 +24,8 @@ class Kupac
             select * from kupac order by ime, prezime
         
         ');
-        $izraz->execute(); // OVO MORA BITI OBAVEZNO
-        return $izraz->fetchAll(); // vraća indeksni niz objekata tipa stdClass
+        $izraz->execute(); 
+        return $izraz->fetchAll(); 
     }
 
     public static function create($kupac)
