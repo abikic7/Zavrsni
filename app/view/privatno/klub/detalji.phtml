@@ -2,12 +2,12 @@
 action="<?=App::config('url')?>klub/promjena/<?=$e->sifra?>">
   
   
-  <label>ime_kluba
+  <label>ime
     <input type="text" name="ime_kluba" value="<?=$e->ime_kluba?>" required/>
   </label>
 
-  <label>Stadion
-    <input type="text" name="stadion" value="<?=$e->stadion?>" />
+  <label>grad
+    <input type="text" name="grad" value="<?=$e->grad?>" />
   </label>
 
   <?=$poruka?>
@@ -15,7 +15,7 @@ action="<?=App::config('url')?>klub/promjena/<?=$e->sifra?>">
   <div class="grid-x grid-padding-x">
     <div class="large-6 cell">
         <a class="alert button expanded" 
-            href="<?=App::config('url')?>nba_team">Odustani</a>
+            href="<?=App::config('url')?>klub">Odustani</a>
     </div>
     <div class="large-6 cell">
         <input type="submit" class="button expanded" value="Spremi"></input>

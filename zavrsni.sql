@@ -6,7 +6,7 @@
 #to 'edunova'@'localhost'
 #identified by 'edunova';
 
-alter database hiperion_zavrsni character set utf8mb4;
+
 
 drop database if exists zavrsni;
 create database zavrsni default charset utf8mb4;
@@ -32,7 +32,7 @@ values
 create table klub(
     sifra int not null primary key auto_increment,
     ime_kluba varchar(50),
-    stadion varchar(50)
+    grad varchar(50)
 );
 
 create table igrac(
@@ -95,17 +95,17 @@ alter table naruceni_proizvodi add foreign key (kosarica) references kosarica(si
 alter table naruceni_proizvodi add foreign key (kupac) references kupac(sifra);
 alter table oprema add foreign key (igrac) references igrac(sifra);
 
-insert into klub (sifra, ime_kluba,stadion)
- values (null,'GNK Dinamo Zagreb','Maksimir'),                  
-        (null,'HNK Hajduk Split', 'Poljud'),             
-        (null,'NK Osijek', 'Gradski vrt'), 
-        (null,'HNK Gorica', 'Gradski stadion Velika Gorica'), 
-        (null,'NK Istra', 'Stadion Aldo Drosina'), 
-        (null,'HNK Rijeka', 'Rujevica'),
-        (null,'NK Lokomotiva', 'Kranjčevićeva'), 
-        (null,'HNK Šibenik', 'Šubićevac'), 
-        (null,'NK Slaven-Belupo', 'Gradski stadion Koprivnica'), 
-        (null,'NK Varaždin', 'Stadion Varteks');
+insert into klub (sifra, ime_kluba,grad)
+ values (null,'GNK Dinamo Zagreb','Zagreb'),                  
+        (null,'HNK Hajduk Split', 'Split'),             
+        (null,'NK Osijek', 'Osijek'), 
+        (null,'HNK Gorica', 'Velika Gorica'), 
+        (null,'NK Istra', 'Pula'), 
+        (null,'HNK Rijeka', 'Rijeka'),
+        (null,'NK Lokomotiva', 'Gorica'), 
+        (null,'HNK Šibenik', 'Šibenik'), 
+        (null,'NK Slaven-Belupo', 'Koprivnica'), 
+        (null,'NK Varaždin', 'Varteks');
 
 
 

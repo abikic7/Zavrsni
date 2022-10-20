@@ -62,7 +62,7 @@ class KlubController extends AutorizacijaController
 
     private function kontrola()
     {
-        return $this->kontrolaIme_kluba() && $this->KontrolaStadion() ;
+        return $this->kontrolaIme_kluba() && $this->kontrolaGrad() ;
     }
 
     private function kontrolaIme_kluba()
@@ -74,10 +74,10 @@ class KlubController extends AutorizacijaController
         return true;
     }
 
-    private function kontrolaStadion()
+    private function kontrolaGrad()
     {
-        if(strlen($this->entitet->stadion)===0){
-            $this->poruka = 'Ime stadiona obavezno';
+        if(strlen($this->entitet->grad)===0){
+            $this->poruka = 'Ime grada obavezno';
             return false;
         }
         return true;

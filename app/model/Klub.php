@@ -50,7 +50,7 @@ class Klub
         
             update klub set
                 ime_kluba=:ime_kluba,
-                stadion=:stadion
+                grad=:grad
                     where sifra=:sifra
         
         ');

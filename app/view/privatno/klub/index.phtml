@@ -2,9 +2,10 @@
     <?php foreach($entiteti as $e):?>
         <div class="large-3 cell">
             <div class="callout" style="text-align: center;">
-                slika
+                
                 <hr />              
-                <h1 style="font-size: 1.0rem;">stadion:<?=$e->stadion?></h1>
+                <h1 style="font-size: 1.0rem;">Ime kluba:<?=$e->ime_kluba?></h1>
+                <h1 style="font-size: 1.0rem;">Grad:<?=$e->grad?></h1>
                 <hr />
                 <a href="<?=App::config('url')?>klub/promjena/<?=$e->sifra?>">
                     <i style="color: blue;" 
