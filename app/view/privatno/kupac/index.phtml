@@ -1,23 +1,23 @@
 <a href="<?=App::config('url')?>kupac/novi"
-    class="success button expanded">Dodaj novi</a>
-<div class="grid-x grid-padding-x">
-    <?php foreach($entiteti as $e):?>
-        <div class="large-3 cell">
-            <div class="callout" style="text-align: center;">
-                slika
-                <hr />
-                <h1 style="font-size: 1.5rem;"> <?=$e->prezime?> <?=$e->ime?></h1>
-                <?=$e->email?>
-                <hr />
-                <a href="<?=App::config('url')?>kupac/promjena/<?=$e->sifra?>">
-                    <i style="color: blue;" 
-                    class="step fi-pencil size-36"></i>
-                </a>
-                <a href="<?=App::config('url')?>kupac/brisanje/<?=$e->sifra?>">
-                <i style="color: red;" 
-                    class="step fi-trash size-36"></i>
-            </a>
-            </div>
-        </div>
-    <?php endforeach ?>
-</div>
+    class="success button expanded">Dodaj novog kupca</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Ime i prezime</th>
+            <th>Email</th>
+        
+        </tr>
+    </thead>
+    <tbody>
+    <?php foreach($entiteti as $e): ?>
+            <tr>
+                <td><?=$e->ime?> <?=$e->prezime?></td>
+                <td><?=$e->email?></td>
+                <td><a href="<?=App::config('url')?>kupac/promjena/<?=$e->sifra?>">Promjena</a> 
+                &nbsp;&nbsp;<a href="<?=App::config('url')?>kupac/brisanje/<?=$e->sifra?>" 
+                        onclick="return confirm('Sigurno želite obrisati kupca <?= $e->ime . ' ' . $e->prezime ?>?');">Brisanje</a>
+            </tr>
+        <?php endforeach;?>
+    </tbody>
+</table>
