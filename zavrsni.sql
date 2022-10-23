@@ -44,8 +44,6 @@ create table igrac(
 );
 
     
-
-
 create table Kupac(
     sifra int not null primary key auto_increment,
     ime varchar(50)not null, 
@@ -54,7 +52,7 @@ create table Kupac(
 
 );
 
-create table oprema (
+create table odjeca (
     sifra int not null primary key auto_increment,
     igrac int not null,
     boja varchar(50),
@@ -73,7 +71,6 @@ create table naruceni_proizvodi (
     
 );
 
-
     
 create table kosarica(
     sifra int not null primary key auto_increment,
@@ -85,15 +82,12 @@ create table kosarica(
 
 );
 
-
-
-
-# definiranje vanjskih ključeva
+ definiranje vanjskih ključeva
 alter table igrac add foreign key (klub) references klub(sifra);
-alter table kosarica add foreign key (oprema) references oprema(sifra);
+alter table kosarica add foreign key (odjeca) references odjeca(sifra);
 alter table naruceni_proizvodi add foreign key (kosarica) references kosarica(sifra);
 alter table naruceni_proizvodi add foreign key (kupac) references kupac(sifra);
-alter table oprema add foreign key (igrac) references igrac(sifra);
+alter table odjeca add foreign key (igrac) references igrac(sifra);
 
 insert into klub (sifra, ime_kluba,grad)
  values (null,'GNK Dinamo Zagreb','Zagreb'),                  
@@ -146,7 +140,7 @@ insert into klub (sifra, ime_kluba,grad)
         (null,'Fran', 'Brodić', 10 );
 
 
-insert into oprema (sifra,vrsta_proizvoda,igrac, boja,velicina, cijena )
+insert into odjeca (sifra,vrsta_proizvoda,igrac, boja,velicina, cijena )
 values 
 (null,'Dres', 1, 'Plavi', 'XL', 699.99),
  (null,'Dres', 1, 'Plavi', 'M', 699.99),

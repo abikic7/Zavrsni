@@ -6,7 +6,7 @@ if($dev){
     return [
         'dev'=>$dev,
         'url'=>'http://fanshop.hr/',
-        'nazivApp'=>'DEV fanshop App',
+        'nazivApp'=>'fanshop App',
         'baza'=>[
             'server'=>'localhost',
             'baza'=>'zavrsni',
@@ -14,4 +14,18 @@ if($dev){
             'lozinka'=>'edunova'
         ]
         ]; 
-    }
+    
+}else{
+    // PRODUKCIJA
+    return [
+        'dev'=>$dev,
+        'url'=>'https://polaznik07.edunova.hr/',
+        'nazivApp'=>'Edunova App',
+        'baza'=>[
+            'server'=>'localhost',
+            'baza'=>'hiperion_edunovapp25',
+            'korisnik'=>'hiperion_edunova',
+            'lozinka'=>'  '
+        ]
+    ];
+}

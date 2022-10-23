@@ -1,17 +1,30 @@
-<div class="grid-x grid-padding-x">
-    <?php foreach($entiteti as $e):?>
-        <div class="large-3 cell">
-            <div class="callout" style="text-align: center;">
-                
-                <hr />              
-                <h1 style="font-size: 1.0rem;">Ime kluba:<?=$e->ime_kluba?></h1>
-                <h1 style="font-size: 1.0rem;">Grad:<?=$e->grad?></h1>
-                <hr />
-                <a href="<?=App::config('url')?>klub/promjena/<?=$e->sifra?>">
-                    <i style="color: blue;" 
-                    class="step fi-pencil size-36"></i>
-                </a>
-            </div>
-        </div>
-    <?php endforeach ?>
-</div>
+<a class="success button expanded" 
+    href="<?=App::config('url')?>klub/novi">
+        Dodaj novi klub
+</a>
+
+<table>
+    <thead>
+        <tr>
+            <th>Ime kluba</th>
+            <th>Grad</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach($entiteti as $e): ?>
+            <tr>
+                <td><?=$e->ime_kluba?> +
+                <td><?=$e->grad?></td>
+                +
+                <td>
+                    <a href="<?=App::config('url')?>klub/promjena/<?=$e->sifra?>">Promjena
+                     </a>
+                    &nbsp;&nbsp;
+                    <a href="<?=App::config('url')?>klub/brisanje/<?=$e->sifra?>" 
+                        onclick="return confirm('Sigurno želite obrisati odabrani klub <?= $e->ime_kluba . ' ' . $e->grad ?>?');">Brisanje</a>
+                </td>
+            </tr>
+        <?php endforeach; ?>
+    </tbody>
+</table>

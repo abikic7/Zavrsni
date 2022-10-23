@@ -18,16 +18,16 @@ class KlubController extends AutorizacijaController
         ]);
     }
 
-    // public function novi()
-    // {
-    //     $noviKupac = Klub::create([
-    //         'ime'=>'',
-    //         'prezime'=>'',
-    //         'email'=>''
-    //     ]);
-    //     header('location: ' . App::config('url') 
-    //             . 'kupac/promjena/' . $noviKupac);
-    // }
+     public function novi()
+     {
+         $noviKlub = Klub::create([
+             'ime_kluba'=>'',
+             'grad'=>'',
+             
+         ]);
+        header('location: ' . App::config('url') 
+                 . 'klub/promjena/' . $noviKlub);
+     }
     
     public function promjena($sifra)
     {

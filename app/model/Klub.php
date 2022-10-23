@@ -28,20 +28,20 @@ class Klub
         return $izraz->fetchAll(); 
     }
 
-    // public static function create($klub)
-    // {
+     public static function create($klub)
+     {
 
-    //     $veza = DB::getInstance();
-    //     $izraz = $veza->prepare('
+     $veza = DB::getInstance();
+         $izraz = $veza->prepare('
         
-    //         insert into 
-    //         kupac(ime,prezime,email)
-    //         values (:ime,:prezime,:email);
+             insert into 
+             klub(ime_kluba,grad)
+             values (:ime_kluba,:grad);
         
-    //     ');
-    //     $izraz->execute($kupac);
-    //     return $veza->lastInsertId();
-    // }
+         ');
+         $izraz->execute($klub);
+         return $veza->lastInsertId();
+     }
 
     public static function update($klub)
     {
@@ -57,17 +57,17 @@ class Klub
         $izraz->execute($klub);
     }
 
-    // public static function delete($sifra)
-    // {
-    //     $veza = DB::getInstance();
-    //     $izraz = $veza->prepare('
+     public static function delete($sifra)
+     {
+         $veza = DB::getInstance();
+         $izraz = $veza->prepare('
         
-    //         delete from kupac where sifra=:sifra
+             delete from klub where sifra=:sifra
         
-    //     ');
-    //     $izraz->execute([
-    //         'sifra'=>$sifra
-    //     ]);
-    // }
+         ');
+         $izraz->execute([
+             'sifra'=>$sifra
+         ]);
+     }
 
 }
