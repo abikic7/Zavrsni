@@ -20,12 +20,12 @@ if($dev){
     return [
         'dev'=>$dev,
         'url'=>'https://polaznik07.edunova.hr/',
-        'nazivApp'=>'Edunova App',
+        'nazivApp'=>'fanshop App',
         'baza'=>[
             'server'=>'localhost',
             'baza'=>'hiperion_edunovapp25',
             'korisnik'=>'hiperion_edunova',
-            'lozinka'=>'  '
+            'lozinka'=>'=pA#kjbtRo~N'
         ]
     ];
 }

@@ -74,10 +74,10 @@ create table naruceni_proizvodi (
     
 create table kosarica(
     sifra int not null primary key auto_increment,
-    oprema int not null,
+    odjeca int not null,
     ukupna_cijena_proizvoda decimal(18,5) not null,
     datum_isporuke datetime,
-    kolicina_opreme int
+    kolicina int
 
 
 );
@@ -115,7 +115,7 @@ insert into klub (sifra, ime_kluba,grad)
         (null,'Nikola', 'Kalinić', 2 ),
         (null,'Ivica', 'Ivušić', 3 ),
         (null,'Mile', 'Škorić', 3 ),
-        (null,'Oslo', 'Kleinheishler', 3 ),
+        (null,'Laslo', 'Kleinheishler', 3 ),
         (null,'Josip', 'Mitrović', 4 ),
         (null,'Toni', 'Fruk', 4 ),
         (null,'Deni', 'Jurić', 4 ),
@@ -237,7 +237,7 @@ values
 
 
 
- insert into kosarica(sifra,oprema, ukupna_cijena_proizvoda, datum_isporuke, kolicina_opreme)
+ insert into kosarica(sifra,odjeca, ukupna_cijena_proizvoda, datum_isporuke, kolicina)
 values(null,1,699.99,"2022-10-18 15:27:30", 2);
                   
 insert into naruceni_proizvodi(sifra,kosarica ,kupac)
