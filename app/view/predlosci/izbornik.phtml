@@ -12,14 +12,16 @@
       <?php if(App::auth()): ?>
         <li><a href="<?=App::config('url') ?>nadzornaploca">Nadzorna ploča</a></li>
         <li>
-          <a href="#"></a>
+          <a href="#">Odabir</a>
           <ul class="vertical menu">
           <li><a href="<?=App::config('url') ?>klub">Klubovi</a></li>
           <li><a href="<?=App::config('url') ?>kupac">Kupci</a></li>
-            <li><a href="<?=App::config('url') ?>''">    ''  </a></li>
-            <li><a href="<?=App::config('url') ?>''">    ''' </a></li>
+          <li><a href="<?=App::config('url') ?>naruceni_proizvodi">Naručeni proizvodi</a></li>
+          <li><a href="<?=App::config('url') ?>nogometas">Nogometaš</a></li>
+          <li><a href="<?=App::config('url') ?>odjeca">Odjeća</a></li>
           </ul>
-        </li>  
+        </li> 
+        <li><a href="<?=App::config('url') ?>erdijagram">ER Dijagram</a></li> 
       <?php endif; ?>
     </ul>
   </div>

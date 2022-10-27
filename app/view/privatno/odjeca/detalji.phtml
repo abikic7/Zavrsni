@@ -1,0 +1,39 @@
+<form method="post" 
+action="<?=App::config('url')?>odjeca/promjena/<?=$e->sifra?>">
+  
+  
+  <label>Veličina
+    <input type="text" name="velicina" value="<?=$e->velicina?>" />
+  </label>
+
+  <label>Boja
+    <input type="text" name="boja" value="<?=$e->boja?>" />
+  </label>
+
+
+  <label>Nogometaš
+    <input type="text" name="nogometas" value="<?=$e->nogometas?>" />
+  </label>
+
+  <label>Cijena
+    <input type="text" name="cijena" value="<?=$e->cijena?>" />
+  </label>
+
+  <label>Vrsta proizvoda
+    <input type="text" name="vrsta_proizvoda" value="<?=$e->vrsta_proizvoda?>" />
+  </label>
+
+  <?=$poruka?>
+
+  <div class="grid-x grid-padding-x">
+    <div class="large-6 cell">
+        <a class="alert button expanded" 
+            href="<?=App::config('url')?>odjeca">Odustani</a>
+    </div>
+    <div class="large-6 cell">
+        <input type="submit" class="button expanded" value="Spremi"></input>
+    </div>
+  </div>
+
+
+</form>

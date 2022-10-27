@@ -82,4 +82,9 @@ class KlubController extends AutorizacijaController
         }
         return true;
     }
+    public function brisanje($sifra)
+    {
+        Klub::delete($sifra);
+        header('location: ' . App::config('url') . 'klub');
+    }
 }

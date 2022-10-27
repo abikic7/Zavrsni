@@ -1,0 +1,39 @@
+<form method="post" 
+action="<?=App::config('url')?>naruceni_proizvodi/promjena/<?=$e->sifra?>">
+  
+  
+  <label>Prezime kupca
+    <input type="text" name="prezime" value="<?=$e->prezime?>" required/>
+  </label>
+
+  <label>Ime kupca
+    <input type="text" name="ime" value="<?=$e->ime?>" />
+  </label>
+
+
+  <label>E-mail
+    <input type="email" name="email" value="<?=$e->email?>" />
+  </label>
+
+  <label>Datum isporuke
+    <input type="text" name="datum_isporuke" value="<?=$e->datum_isporuke?>" />
+  </label>
+  
+  <label> Cijena proizvoda 
+    <input type="text" name="ukupna_cijena_proizvoda" value="<?=$e->ukupna_cijena_proizvoda?>" />
+  </label>
+
+  <?=$poruka?>
+
+  <div class="grid-x grid-padding-x">
+    <div class="large-6 cell">
+        <a class="alert button expanded" 
+            href="<?=App::config('url')?>naruceni_proizvodi">Odustani</a>
+    </div>
+    <div class="large-6 cell">
+        <input type="submit" class="button expanded" value="Spremi"></input>
+    </div>
+  </div>
+
+
+</form>

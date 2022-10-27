@@ -23,7 +23,7 @@ if($dev){
         'nazivApp'=>'fanshop App',
         'baza'=>[
             'server'=>'localhost',
-            'baza'=>'hiperion_edunovapp25',
+            'baza'=>'hiperion_zavrsni',
             'korisnik'=>'hiperion_edunova',
             'lozinka'=>'=pA#kjbtRo~N'
         ]

@@ -13,8 +13,8 @@ session_start();
 
 define('BP',__DIR__ . DIRECTORY_SEPARATOR);
 define('BP_APP',BP . 'app' . DIRECTORY_SEPARATOR);
-echo BP, '<br />';
-echo BP_APP, '<br />';
+// echo BP, '<br />';
+// echo BP_APP, '<br />';
 
 
 $zaAutoload = [

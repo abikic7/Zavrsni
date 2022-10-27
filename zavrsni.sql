@@ -35,7 +35,7 @@ create table klub(
     grad varchar(50)
 );
 
-create table igrac(
+create table nogometas(
     sifra int not null primary key auto_increment,
     klub int not null,
     ime varchar(50) ,
@@ -54,14 +54,11 @@ create table Kupac(
 
 create table odjeca (
     sifra int not null primary key auto_increment,
-    igrac int not null,
-    boja varchar(50),
     velicina varchar(50),
+    boja varchar(50),
+    nogometas int,
     cijena decimal(18,2),
-    vrsta_proizvoda varchar(50) 
-    
-    
-    
+    vrsta_proizvoda varchar(50)  
 );
 
 create table naruceni_proizvodi (
@@ -75,19 +72,19 @@ create table naruceni_proizvodi (
 create table kosarica(
     sifra int not null primary key auto_increment,
     odjeca int not null,
-    ukupna_cijena_proizvoda decimal(18,5) not null,
+    ukupna_cijena_proizvoda decimal(18,2) not null,
     datum_isporuke datetime,
     kolicina int
 
 
 );
 
- definiranje vanjskih ključeva
-alter table igrac add foreign key (klub) references klub(sifra);
+ 
+alter table nogometas add foreign key (klub) references klub(sifra);
 alter table kosarica add foreign key (odjeca) references odjeca(sifra);
 alter table naruceni_proizvodi add foreign key (kosarica) references kosarica(sifra);
 alter table naruceni_proizvodi add foreign key (kupac) references kupac(sifra);
-alter table odjeca add foreign key (igrac) references igrac(sifra);
+alter table odjeca add foreign key (nogometas) references nogometas(sifra);
 
 insert into klub (sifra, ime_kluba,grad)
  values (null,'GNK Dinamo Zagreb','Zagreb'),                  
@@ -103,7 +100,7 @@ insert into klub (sifra, ime_kluba,grad)
 
 
 
-    insert into igrac ( sifra, ime, prezime, klub)
+    insert into nogometas ( sifra, ime, prezime, klub)
         values           
         (null,'Bruno', 'Petković', 1 ),
         (null,'Mislav', 'Oršić', 1 ),
@@ -140,7 +137,7 @@ insert into klub (sifra, ime_kluba,grad)
         (null,'Fran', 'Brodić', 10 );
 
 
-insert into odjeca (sifra,vrsta_proizvoda,igrac, boja,velicina, cijena )
+insert into odjeca (sifra,vrsta_proizvoda,nogometas, boja,velicina, cijena )
 values 
 (null,'Dres', 1, 'Plavi', 'XL', 699.99),
  (null,'Dres', 1, 'Plavi', 'M', 699.99),
@@ -238,7 +235,7 @@ values
 
 
  insert into kosarica(sifra,odjeca, ukupna_cijena_proizvoda, datum_isporuke, kolicina)
-values(null,1,699.99,"2022-10-18 15:27:30", 2);
+values(null,1,699.99,"2022-10-18 15:27:30",2);
                   
 insert into naruceni_proizvodi(sifra,kosarica ,kupac)
 values(1,1,1);
