@@ -40,7 +40,6 @@ create table nogometas(
     klub int not null,
     ime varchar(50) ,
     prezime varchar(50)
-   
 );
 
     
@@ -49,7 +48,6 @@ create table Kupac(
     ime varchar(50)not null, 
     prezime varchar(50)not null,
     email varchar(50)not null
-
 );
 
 create table odjeca (
@@ -63,20 +61,17 @@ create table odjeca (
 
 create table naruceni_proizvodi (
     sifra int not null primary key auto_increment,
-    kosarica int not null,
-    kupac int not null
-    
+    kosarica int,
+    kupac int   
 );
 
     
 create table kosarica(
     sifra int not null primary key auto_increment,
-    odjeca int not null,
-    ukupna_cijena_proizvoda decimal(18,2) not null,
+    odjeca int ,
+    ukupna_cijena_proizvoda decimal(18,2),
     datum_isporuke datetime,
     kolicina int
-
-
 );
 
  
@@ -220,7 +215,8 @@ values
  (null,'Hlačice', 10, 'Bijelo-plavi', 'L', 78.99),
  (null,'Hlačice', 10, 'Bijelo-plavi', 'XL', 78.99);
 
- 
+ insert into kosarica(sifra,odjeca, ukupna_cijena_proizvoda, datum_isporuke, kolicina)
+values(null,1,699.99,"2022-10-18 15:27:30",2);
 
 
  insert into kupac(sifra,ime, prezime,email)
@@ -232,10 +228,6 @@ values
  (null,'Krešimir','Drogba','kredro@gmail.com'),
  (null,'Stjepan','Petković','stjep@gmail.com');
 
-
-
- insert into kosarica(sifra,odjeca, ukupna_cijena_proizvoda, datum_isporuke, kolicina)
-values(null,1,699.99,"2022-10-18 15:27:30",2);
                   
 insert into naruceni_proizvodi(sifra,kosarica ,kupac)
 values(1,1,1);
