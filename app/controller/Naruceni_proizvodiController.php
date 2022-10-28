@@ -19,16 +19,16 @@ class Naruceni_proizvodiController extends AutorizacijaController
 
     public function novi()
     {
-        $noviNaruceni = Naruceni_proizvodi::create([   
+        $noviNaruceni_proizvodi = Naruceni_proizvodi::create([   
             'ime'=>'',
             'prezime'=>'',
             'email'=>'',
-            'datum_isporuke'=>'',
-            'ukupna_cijena_proizvoda'=>''
+            'ukupna_cijena_proizvoda'=>'',
+            'datum_isporuke'=>''
             
         ]);
         header('location: ' . App::config('url') 
-                . 'naruceni_proizvodi/promjena/' . $noviNaruceni);
+                . 'naruceni_proizvodi/promjena/' . $noviNaruceni_proizvodi);
     }
 
     public function promjena($sifra)
@@ -48,6 +48,10 @@ class Naruceni_proizvodiController extends AutorizacijaController
         }
 
         
+
+        
+
+        
         $this->entitet = (object) $_POST;
         $this->entitet->sifra=$sifra;
     
@@ -62,12 +66,9 @@ class Naruceni_proizvodiController extends AutorizacijaController
             'poruka'=>$this->poruka
         ]);
     }
-   
-
-
-
-
     
+
+
     private function kontrola()
     {
      

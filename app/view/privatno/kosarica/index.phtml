@@ -1,24 +1,22 @@
-<div class="grid-x grid-padding-x">
-<a class="success button expanded" 
-    href="<?=App::config('url')?>naruceni_proizvodi/novi">
-        Dodaj proizvod
-</a>
+<a href="<?=App::config('url')?>kosarica/novi"
+    class="success button expanded">Dodaj u košaricu</a>
+
+    </a>
     <?php foreach($entiteti as $e):?>
         <div class="large-3 cell">
             <div class="callout" style="text-align: center;">
                 
                 <hr />
-                <h1 style="font-size: 1.5rem;"> <?=$e->ime?>  </h1>
-                <h2 style="font-size: 1.5rem;"> <?=$e->prezime?> </h2>
+                <h1 style="font-size: 1.5rem;">Odjeća <?=$e->odjeca?>  </h1>
                 <h3 style="font-size: 1.20rem;">Datum isporuke: <?=$e->datum_isporuke?>   </h3>
                 <h5 style="font-size: 1.0rem;">Cijena: <?=$e->ukupna_cijena_proizvoda?> HRK</h5>
                 <h4 style="font-size: 1.20rem;">Količina odjeće: <?=$e->kolicina?> </h4>
                 <hr />
-                <a href="<?=App::config('url')?>naruceni_proizvodi/promjena/<?=$e->sifra?>">
+                <a href="<?=App::config('url')?>kosarica/promjena/<?=$e->sifra?>">
                 Promjena
                 </a>
                 </a>
-                <a href="<?=App::config('url')?>naruceni_proizvodi/brisanje/<?=$e->sifra?>">
+                <a href="<?=App::config('url')?>kosarica/brisanje/<?=$e->sifra?>">
                 Brisanje
                 <i style="color: red;" 
                     class="step fi-trash size-36"></i>

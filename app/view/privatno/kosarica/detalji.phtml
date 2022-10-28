@@ -1,0 +1,35 @@
+<form method="post" 
+action="<?=App::config('url')?>kosarica/promjena/<?=$e->sifra?>">
+  
+  
+  <label>Odjeća
+    <input type="text" name="odjeca" value="<?=$e->odjeca?>" />
+  </label>
+
+  <label>Ukupna cijena proizvoda
+    <input type="text" name="ukupna_cijena_proizvoda" value="<?=$e->ukupna_cijena_proizvoda?>" />
+  </label>
+
+
+  <label>Datum isporuke
+    <input type="text" name="datum_isporuke" value="<?=$e->datum_isporuke?>" />
+  </label>
+
+  <label>Količina
+    <input type="text" name="kolicina" value="<?=$e->kolicina?>" />
+  </label>
+
+  <?=$poruka?>
+
+  <div class="grid-x grid-padding-x">
+    <div class="large-6 cell">
+        <a class="alert button expanded" 
+            href="<?=App::config('url')?>kupac">Odustani</a>
+    </div>
+    <div class="large-6 cell">
+        <input type="submit" class="button expanded" value="Spremi"></input>
+    </div>
+  </div>
+
+
+</form>
