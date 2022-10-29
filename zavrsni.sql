@@ -8,9 +8,11 @@
 
 
 
-drop database if exists zavrsni;
-create database zavrsni default charset utf8mb4;
-use zavrsni;
+#drop database if exists zavrsni;
+#create database zavrsni default charset utf8mb4;
+#use zavrsni;
+
+alter database hiperion_zavrsni  character set utf8mb4;
 
 create table operater(
     sifra int not null primary key auto_increment,
@@ -43,7 +45,7 @@ create table nogometas(
 );
 
     
-create table Kupac(
+create table kupac(
     sifra int not null primary key auto_increment,
     ime varchar(50)not null, 
     prezime varchar(50)not null,

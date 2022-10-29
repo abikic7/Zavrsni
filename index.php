@@ -16,6 +16,10 @@ define('BP_APP',BP . 'app' . DIRECTORY_SEPARATOR);
 // echo BP, '<br />';
 // echo BP_APP, '<br />';
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 
 $zaAutoload = [
     BP_APP . 'core',
