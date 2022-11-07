@@ -20,100 +20,86 @@ class KosaricaController extends AutorizacijaController
 
     public function novi()
     {
-        $noviKosarica = Kosarica::create([
-            'odjeca'=>'',
+        $novi = Kosarica::create([   
+            'odjeca'=>1,
             'ukupna_cijena_proizvoda'=>'',
-            'datum_isporuke'=>'',
-            'kolicina'=>''
+            'datum_isporuke'=>'', 
+            'kolicina'=>''           
         ]);
         header('location: ' . App::config('url') 
-                . 'kosarica/promjena/' . $noviKosarica);
+                . 'kosarica/promjena/' . $novi);
     }
-    
+
     public function promjena($sifra)
     {
-        if(!isset($_POST['ime'])){
+        $odjece=$this->ucitajOdjece();
+       
 
+        if(!isset($_POST['cijena'])){
             $e = Kosarica::readOne($sifra);
             if($e==null){
                 header('location: ' . App::config('url') . 'kosarica');
             }
-
+           
             $this->view->render($this->phtmlDir . 'detalji',[
                 'e' => $e,
+                'odjece'=>$odjece,
                 'poruka' => 'Unesite podatke'
             ]);
+            
             return;
         }
+        
 
         $this->entitet = (object) $_POST;
         $this->entitet->sifra=$sifra;
-    
-        if($this->kontrola()){
-            Kosarica::update((array)$this->entitet);
+      
+        
+             Kosarica::update((array)$this->entitet);
             header('location: ' . App::config('url') . 'kosarica');
-            return;
-        }
+            
+            return
+        
 
-        $this->view->render($this->phtmlDir . 'detalji',[
-            'e'=>$this->entitet,
-            'poruka'=>$this->poruka
-        ]);
-    }
-
-    private function kontrola()
-    {
-        return $this->kontrolaOdjeca() && $this->kontrolaUkupna_cijena_proizvoda()
-        && $this->kontrolaDatum_isporuke()&& $this->kontrolaKolicina();
-    }
-
-    private function kontrolaOdjeca()
-    {
-        if(strlen($this->entitet->ime)===0){
-            $this->poruka = 'Odjeća obavezno';
-            return false;
-        }
-        return true;
-    }
-
-    private function kontrolaUkupna_cijena_proizvoda()
-    {
-        if(strlen($this->entitet->prezime)===0){
-            $this->poruka = 'Cijena obavezno';
-            return false;
-        }
-        return true;
-    }
-
-    private function kontrolaDatum_isporuke()
-    {
-        if(strlen($this->entitet->prezime)===0){
-            $this->poruka = 'Datum obavezno';
-            return false;
-        }
-        return true;
-    }
-
-    private function kontrolaKolicina()
-    {
-        if(strlen($this->entitet->prezime)===0){
-            $this->poruka = 'Količina obavezno';
-            return false;
-        }
-        return true;
+        $this->detalji($this->entitet,$odjece,$this->poruka);
     }
 
 
+private function detalji($e,$odjece,$poruka)
+{
+    $this->view->render($this->phtmlDir . 'detalji',[
+        'e'=>$e,
+        'odjece'=>$odjece,
+        'poruka'=>$poruka
+    ]);
+} 
 
-
-
-
-
-
-    public function brisanje($sifra)
-    {
-        Kosarica::delete($sifra);
-        header('location: ' . App::config('url') . 'kosarica');
+private function ucitajOdjece()
+{
+    $odjece = [];
+    $n = new stdClass();
+    $n->sifra=0;
+    $n->cijena='cijena';
+    $n->boja='boja';
+    $n->velicina='velicina';
+    $n->vrsta_proizvoda='vrsta proizvoda';
+    $odjece[]=$n;
+    foreach(Odjeca::read() as $odjeca){
+        $odjece[]=$odjece;
     }
+    return $odjece;
+}
+
+
+
+  
+
+public function brisanje($sifra)
+{
+    Kosarica::delete($sifra);
+    header('location: ' . App::config('url') . 'kosarica');
+}
+
+
 
 }
