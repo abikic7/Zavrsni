@@ -24,7 +24,7 @@ class OdjecaController extends AutorizacijaController
         $noviOdjeca = Odjeca::create([ 
             'velicina'=>'',
             'boja'=>'',
-             'nogometas'=>'',
+            'nogometas'=>'',
             'cijena'=>'',
             'vrsta_proizvoda'=>''
 

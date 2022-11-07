@@ -93,7 +93,7 @@ private function ucitajKlub()
 
     private function kontrola()
     {
-      
+      return true;
     }
 
 

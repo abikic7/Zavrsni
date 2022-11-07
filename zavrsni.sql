@@ -64,7 +64,7 @@ create table odjeca (
 create table naruceni_proizvodi (
     sifra int not null primary key auto_increment,
     kosarica int,
-    kupac int   
+    kupac int  
 );
 
     
