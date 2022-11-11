@@ -11,9 +11,17 @@ action="<?=App::config('url')?>odjeca/promjena/<?=$e->sifra?>">
   </label>
 
 
-  <label>Nogometaš
-    <input type="text" name="nogometas" value="<?=$e->nogometas?>" />
-  </label>
+  <label for="nogometas">Nogometaš</label>
+<select name="nogometas" id="nogometas">
+    <?php foreach($nogometasi as $n): ?>
+        <option
+        <?php if ($e->nogometas==$n->sifra){
+            echo ' selected="selected"';
+        }
+        ?>
+        value="<?=$n->sifra?>"><?=$n->ime?> <?=$n->prezime?></option>
+    <?php endforeach; ?>
+</select>
 
   <label>Cijena
     <input type="text" name="cijena" value="<?=$e->cijena?>" />

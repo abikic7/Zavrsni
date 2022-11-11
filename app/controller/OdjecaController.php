@@ -24,7 +24,7 @@ class OdjecaController extends AutorizacijaController
         $noviOdjeca = Odjeca::create([ 
             'velicina'=>'',
             'boja'=>'',
-            'nogometas'=>'',
+            'nogometas'=>1,
             'cijena'=>'',
             'vrsta_proizvoda'=>''
 
@@ -35,6 +35,8 @@ class OdjecaController extends AutorizacijaController
     
     public function promjena($sifra)
     {
+
+        $nogometase = $this->ucitajNogometase();
         if(!isset($_POST['ime'])){
 
             $e = Odjeca::readOne($sifra);
@@ -60,7 +62,8 @@ class OdjecaController extends AutorizacijaController
 
         $this->view->render($this->phtmlDir . 'detalji',[
             'e'=>$this->entitet,
-            'poruka'=>$this->poruka
+            'poruka'=>$this->poruka,
+            'nogometase'=>$nogometase
         ]);
     }
 
@@ -91,6 +94,20 @@ class OdjecaController extends AutorizacijaController
     {
         Odjeca::delete($sifra);
         header('location: ' . App::config('url') . 'odjeca');
+    }
+
+    private function ucitajNogometase()
+    {
+        $nogometasi = [];
+        $n = new stdClass();
+        $n->sifra=0;
+        $n->ime='Odaberi';
+        $n->prezime='Nogometaša';
+        $nogometasi[]=$n;
+        foreach(Nogometas::read() as $nogometas){
+            $nogometasi[]=$nogometas;
+        }
+        return $nogometasi;
     }
 
 }

@@ -10,8 +10,10 @@ class Nogometas
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-        select * from nogometas
-        where sifra=:sifra 
+        select b.ime_kluba, a.ime , a.prezime  
+        from nogometas a left join klub b
+        on a.klub =b.sifra 
+        where a.sifra=:sifra
         
         ');
         $izraz->execute([

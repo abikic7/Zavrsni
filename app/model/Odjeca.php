@@ -8,9 +8,11 @@ class Odjeca
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-        select * from odjeca
-        where 
-        sifra=:sifra
+        select b.ime,b.prezime, a.velicina, a.boja, a.cijena, a.vrsta_proizvoda 
+        from odjeca a inner join nogometas b
+        on a.nogometas = b.sifra
+        where a.sifra =:sifra
+    
         
         ');
         $izraz->execute([
@@ -25,7 +27,11 @@ class Odjeca
         $veza = DB::getInstance();
         $izraz = $veza->prepare('
         
-        select * from odjeca  
+        select a.sifra,b.ime,b.prezime, a.velicina, a.boja, a.cijena, a.vrsta_proizvoda 
+        from odjeca a inner join nogometas b
+        on a.nogometas = b.sifra
+        group by a.sifra,b.ime,b.prezime, a.velicina, a.boja, a.cijena, a.vrsta_proizvoda
+        order by 4,3
         
         ');
         $izraz->execute(); 
@@ -35,7 +41,6 @@ class Odjeca
     public static function create($p) 
     {
         $veza = DB::getInstance();
-        $veza->beginTransaction();
         $izraz = $veza->prepare('
         insert into odjeca (velicina,boja,nogometas,cijena,vrsta_proizvoda)
         values (:velicina,:boja,:nogometas,:cijena,:vrsta_proizvoda);
@@ -49,14 +54,13 @@ class Odjeca
             'vrsta_proizvoda'=>$p['vrsta_proizvoda']
         ]);
     
-        return $veza->commit();
+        return $veza->lastInsertId();
          
     }
 
     public static function update($p)
     {
         $veza = DB::getInstance();
-        $veza->beginTransaction();
         $izraz = $veza->prepare('
         update odjeca set
         velicina=:velicina,
@@ -73,7 +77,7 @@ class Odjeca
         'vrsta_proizvoda'=>$p['vrsta_proizvoda']
     ]);
     
-        return $veza->commit();
+       // return $veza->commit();
          
     }
 
@@ -88,6 +92,7 @@ class Odjeca
         $izraz->execute([
             'sifra'=>$sifra
         ]);
+        $izraz->fetchColumn();
         
     }
     
