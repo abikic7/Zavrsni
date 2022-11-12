@@ -81,6 +81,23 @@ class Odjeca
          
     }
 
+    public static function dodajnogometas($nogometas)
+    {
+        $veza = DB::getInstance();
+        $izraz = $veza->prepare('
+        
+           insert into odjeca(nogometas) values
+           (:nogometas)
+        
+        ');
+        $izraz->execute([
+            'nogometas'=>$nogometas
+        ]);
+    }
+
+
+
+
     public static function delete($sifra)
     {
         $veza = DB::getInstance();

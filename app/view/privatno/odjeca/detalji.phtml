@@ -1,47 +1,52 @@
-<form method="post" 
-action="<?=App::config('url')?>odjeca/promjena/<?=$e->sifra?>">
-  
-  
+<?php
+    $sifra = $e ? $e->sifra : ''; 
+?>
+<form method="post" action="<?=App::config('url')?>odjeca/promjena/<?= $sifra?>">
+  <h4 class="text-center">Detalji odjeće</h4>
+
+<label>Nogometaš</label>
+        <select name="nogometas" id="nogometas">
+            <?php foreach($nogometasi as $n): ?>
+                <option
+                <?php if($e instanceof stdClass && $e->nogometas == $n->sifra){
+                    echo ' selected=="selected"';
+                }
+                ?>
+                value="<?=$n->sifra?>"><?=$n->ime?> <?=$n->prezime?></option>
+            <?php endforeach; ?>
+        </select>
+
+
+  <label>Cijena
+    <input type="text" name="cijena" value="<?=($e instanceof stdClass) ? $e->cijena : ''?>" />
+  </label>
+
   <label>Veličina
-    <input type="text" name="velicina" value="<?=$e->velicina?>" />
+    <input type="text" name="veličina" value="<?=($e instanceof stdClass) ? $e->velicina : ''?>" />
   </label>
 
   <label>Boja
-    <input type="text" name="boja" value="<?=$e->boja?>" />
-  </label>
-
-
-  <label for="nogometas">Nogometaš</label>
-<select name="nogometas" id="nogometas">
-    <?php foreach($nogometasi as $n): ?>
-        <option
-        <?php if ($e->nogometas==$n->sifra){
-            echo ' selected="selected"';
-        }
-        ?>
-        value="<?=$n->sifra?>"><?=$n->ime?> <?=$n->prezime?></option>
-    <?php endforeach; ?>
-</select>
-
-  <label>Cijena
-    <input type="text" name="cijena" value="<?=$e->cijena?>" />
+    <input type="text" name="boja" value="<?=($e instanceof stdClass) ? $e->boja : ''?>" />
   </label>
 
   <label>Vrsta proizvoda
-    <input type="text" name="vrsta_proizvoda" value="<?=$e->vrsta_proizvoda?>" />
+    <input type="text" name="vrsta_proizvoda" value="<?=($e instanceof stdClass) ? $e->vrsta_proizvoda : ''?>" />
   </label>
+
+  <input type="hidden" name="nova" value="<?=($e instanceof stdClass) ? 0 : 1 ?>" />
+  
+ 
 
   <?=$poruka?>
 
-  <div class="grid-x grid-padding-x">
+<div class="grid-x grid-padding-x">
     <div class="large-6 cell">
         <a class="alert button expanded" 
-            href="<?=App::config('url')?>odjeca">Odustani</a>
+            href="<?=App::config('url')?>rezervacija">Odustani</a>
     </div>
     <div class="large-6 cell">
         <input type="submit" class="button expanded" value="Spremi"></input>
     </div>
-  </div>
-
+</div>
 
 </form>

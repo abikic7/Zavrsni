@@ -20,52 +20,65 @@ class OdjecaController extends AutorizacijaController
     public function novi()
     {
 
-
-        $noviOdjeca = Odjeca::create([ 
-            'velicina'=>'',
-            'boja'=>'',
-            'nogometas'=>1,
-            'cijena'=>'',
-            'vrsta_proizvoda'=>''
-
-        ]);
-        header('location: ' . App::config('url') 
-                . 'odjeca/promjena/' . $noviOdjeca);
+        header('location: ' . App::config('url') . 'odjeca/promjena/');
+       
     }
     
     public function promjena($sifra)
     {
+        $nogometasi = $this->ucitajNogometase();
+        
+        
 
-        $nogometase = $this->ucitajNogometase();
-        if(!isset($_POST['ime'])){
+        if (isset($_POST['novi']) && $_POST['novi'] === '1' ) {
+            Nogometas::create($_POST);
+            header('location: ' . App::config('url') . 'nogometas');
+            return;
+        }
 
-            $e = Odjeca::readOne($sifra);
-            if($e==null){
-                header('location: ' . App::config('url') . 'odjeca');
-            }
-
-            $this->view->render($this->phtmlDir . 'detalji',[
-                'e' => $e,
-                'poruka' => 'Unesite podatke'
-            ]);
+        if(!$sifra){
+            //prazna forma
+            $this->detalji(false,$nogometasi,'Unesite podatke');
             return;
         }
 
         $this->entitet = (object) $_POST;
         $this->entitet->sifra=$sifra;
+        
+        
     
-        if($this->kontrola()){
-            Odjeca::update((array)$this->entitet);
+        $entitet = Odjeca::readOne($sifra);
+
+        if (!$entitet instanceof stdClass || $entitet->sifra != true) {
+            header('location: ' . App::config('url') . 'odjeca');
+        }
+
+        if (isset($_POST['novi']) && $_POST['nov'] === '0' ) {
+            $_POST['sifra'] = $sifra;
+            Odjeca::update($_POST);
             header('location: ' . App::config('url') . 'odjeca');
             return;
         }
+    
 
-        $this->view->render($this->phtmlDir . 'detalji',[
-            'e'=>$this->entitet,
-            'poruka'=>$this->poruka,
-            'nogometase'=>$nogometase
+        $this->detalji($entitet,$nogometasi,$this->poruka);
+    }
+
+    private function detalji($e,$nogometasi,$poruka)
+    {
+        $this->view->render($this->phtmlDir . 'detalji', [
+            'e'=>$e,
+            'nogometasi'=>$nogometasi,
+            'poruka'=>$poruka,
+            
         ]);
     }
+
+
+
+
+
+
 
     private function kontrola()
     {
