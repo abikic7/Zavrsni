@@ -1,27 +1,35 @@
-<form method="post" 
-action="<?=App::config('url')?>nogometas/promjena/<?=$e->sifra?>">
-<label for="naziv">Ime nogometaša</label>
-<input type="text" name="ime" id="ime" value="<?=$e->ime?>">
-<label for="naziv">Prezime nogometaša</label>
-<input type="text" name="prezime" id="prezime" value="<?=$e->prezime?>">
 
-<label for="klub">Ekipa</label>
-<select name="klub" id="klub">
-    <?php foreach($klubovi as $n): ?>
-        <option
-        <?php if ($e->Klub==$n->sifra){
-            echo ' selected="selected"';
-        }
-        ?>
-        value="<?=$n->sifra?>"><?=$n->$ime_kluba?></option>
-    <?php endforeach; ?>
-    </select>
+<form method="post" action="<?=App::config('url')?>nogometas/promjena/<?= $sifra?>">
+  <h4 class="text-center">Detalji nogometaša</h4>
+
+<label>Klub</label>
+        <select name="klub" id="klub">
+            <?php foreach($klubovi as $k): ?>
+                <option
+                <?php if($e instanceof stdClass && $e->klub == $k->sifra){
+                    echo ' selected=="selected"';
+                }
+                ?>
+                value="<?=$k->sifra?>"><?=$k->ime_kluba?> </option>
+            <?php endforeach; ?>
+        </select>
 
 
+  <label>Ime
+    <input type="text" name="ime" value="<?=($e instanceof stdClass) ? $e->ime : ''?>" />
+  </label>
 
-<?=$poruka?>
+  <label>Prezime
+    <input type="text" name="prezime" value="<?=($e instanceof stdClass) ? $e->prezime : ''?>" />
+  </label>
 
-  <div class="grid-x grid-padding-x">
+  </label>
+
+  <input type="hidden" name="nova" value="<?=($e instanceof stdClass) ? 0 : 1 ?>" />
+
+  <?=$poruka?>
+
+<div class="grid-x grid-padding-x">
     <div class="large-6 cell">
         <a class="alert button expanded" 
             href="<?=App::config('url')?>nogometas">Odustani</a>
@@ -29,6 +37,6 @@ action="<?=App::config('url')?>nogometas/promjena/<?=$e->sifra?>">
     <div class="large-6 cell">
         <input type="submit" class="button expanded" value="Spremi"></input>
     </div>
-  </div>
+</div>
 
 </form>

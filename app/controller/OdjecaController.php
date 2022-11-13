@@ -24,7 +24,7 @@ class OdjecaController extends AutorizacijaController
        
     }
     
-    public function promjena($sifra)
+    public function promjena($sifra=false)
     {
         $nogometasi = $this->ucitajNogometase();
         
@@ -37,7 +37,7 @@ class OdjecaController extends AutorizacijaController
         }
 
         if(!$sifra){
-            //prazna forma
+            
             $this->detalji(false,$nogometasi,'Unesite podatke');
             return;
         }
@@ -53,7 +53,7 @@ class OdjecaController extends AutorizacijaController
             header('location: ' . App::config('url') . 'odjeca');
         }
 
-        if (isset($_POST['novi']) && $_POST['nov'] === '0' ) {
+        if (isset($_POST['novi']) && $_POST['novi'] === '0' ) {
             $_POST['sifra'] = $sifra;
             Odjeca::update($_POST);
             header('location: ' . App::config('url') . 'odjeca');
@@ -69,7 +69,7 @@ class OdjecaController extends AutorizacijaController
         $this->view->render($this->phtmlDir . 'detalji', [
             'e'=>$e,
             'nogometasi'=>$nogometasi,
-            'poruka'=>$poruka,
+            'poruka'=>$poruka
             
         ]);
     }
@@ -80,28 +80,28 @@ class OdjecaController extends AutorizacijaController
 
 
 
-    private function kontrola()
-    {
-        return $this->kontrolaVelicina() && $this->kontrolaBoja();
-    }
+ //   private function kontrola()
+   // {
+  //      return $this->kontrolaVelicina() && $this->kontrolaBoja();
+   // }
 
-    private function kontrolaVelicina()
-    {
-        if(strlen($this->entitet->velicina)===0){
-            $this->poruka = 'Velicina obavezno';
-            return false;
-        }
-        return true;
-    }
+  //  private function kontrolaVelicina()
+  //  {
+ //       if(strlen($this->entitet->velicina)===0){
+   //         $this->poruka = 'Velicina obavezno';
+   //         return false;
+   //     }
+   //     return true;
+  //  }
 
-    private function kontrolaBoja()
-    {
-        if(strlen($this->entitet->boja)===0){
-            $this->poruka = 'Boja obavezno';
-            return false;
-        }
-        return true;
-    }
+   // private function kontrolaBoja()
+  //  {
+   //     if(strlen($this->entitet->boja)===0){
+    //        $this->poruka = 'Boja obavezno';
+   //         return false;
+  //      }
+ //       return true;
+  //  }
 
     public function brisanje($sifra)
     {
@@ -123,4 +123,15 @@ class OdjecaController extends AutorizacijaController
         return $nogometasi;
     }
 
+    public function dodajnogometas()
+    {
+        if(!isset($_GET['odjeca']) || !isset($_GET['nogometas'])){
+            return;
+        }
+        Odjeca::dodajnogometas($_GET['odjeca'],$_GET['nogometas']);
+    }
+
+
 }
+
+

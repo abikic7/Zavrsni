@@ -30,6 +30,7 @@ class Nogometas
         select b.ime_kluba, a.ime , a.prezime  
         from nogometas a left join klub b
         on a.klub =b.sifra 
+        group by b.ime_kluba,a.ime,a.prezime
         
         ');
         $izraz->execute(); 

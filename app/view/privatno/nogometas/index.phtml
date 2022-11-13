@@ -1,33 +1,23 @@
-<a class="success button expanded" 
-    href="<?=App::config('url')?>nogometas/novi">
-        Dodaj novog nogometaša
-</a>
+<a href="<?=App::config('url')?>nogometas/novi"
+    class="success button expanded">Dodaj novog nogometaša</a>
 
 <table>
     <thead>
         <tr>
-            <th>Ekipa</th>
+            <th>Klub</th>
             <th>Ime</th>
             <th>Prezime</th>
+        
         </tr>
     </thead>
     <tbody>
-        <?php foreach($entiteti as $e): ?>
+    <?php foreach($entiteti as $e): ?>
             <tr>
-            <td><?=$e->ime_kluba?></td>
-                <td><?=$e->ime?></td>
-                <td><?=$e->prezime?></td>
-                <td>
-                    <div>
-                    <a href="<?=App::config('url')?>nogometas/promjena/<?=$e->sifra?>">
-                            <i style="color: blue;" 
-                            class="step fi-pencil size-36"></i>
-                     </a>
-                     </div>
-                     <div>
-                     <a href="<?=App::config('url')?>nogometas/promjena/<?=$e->sifra?>">Promjena</a> 
+                <td><?=$e->ime_kluba?></td>
+                <td><?=$e->ime?> <?=$e->prezime?></</td>
+                <td><a href="<?=App::config('url')?>nogometas/promjena/<?=$e->sifra?>">Promjena</a> 
                 &nbsp;&nbsp;<a href="<?=App::config('url')?>nogometas/brisanje/<?=$e->sifra?>" 
-                        onclick="return confirm('Sigurno želite obrisati nogometaša <?= $e->ime . ' ' . $e->prezime ?>?');">Brisanje</a>
+                onclick="return confirm('Sigurno želite obrisati kupca <?= $e->ime . ' ' . $e->prezime ?>?');">Brisanje</a>
             </tr>
         <?php endforeach;?>
     </tbody>

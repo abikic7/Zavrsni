@@ -20,33 +20,49 @@ class NogometasController extends AutorizacijaController
 
     public function novi()
     {
-        $noviNogometas = Nogometas::create([   
-            'klub'=>null,
-            'ime'=>'',
-            'prezime'=>''
-            
-        ]);
+        
         header('location: ' . App::config('url') 
-                . 'nogometas/promjena/' . $noviNogometas);
+                . 'nogometas/promjena/');
     }
 
-    public function promjena($sifra)
+    public function promjena($sifra = false)
     {
-        $klub=$this->ucitajKlub();
-       
-
-        if(!isset($_POST['ime'])){
-
-            $e = Nogometas::readOne($sifra);
-            if($e==null){
-                header('location: ' . App::config('url') . 'nogometas');
+        {
+            $klubovi = $this->ucitajKlubove();
+            
+            
+    
+            if (isset($_POST['nova']) && $_POST['nova'] === '1' ) {
+                Klub::create($_POST);
+                header('location: ' . App::config('url') . 'klub');
+                return;
             }
+    
+            if(!$sifra){
+                
+                $this->detalji(false,$klubovi,'Unesite podatke');
+                return;
+            }
+    
+            $this->entitet = (object) $_POST;
+            $this->entitet->sifra=$sifra;
 
-            $this->view->render($this->phtmlDir . 'detalji',[
-                'e' => $e,
-                'poruka' => 'Unesite podatke'
-            ]);
+
+            $entitet = Nogometas::readOne($sifra);
+
+        if (!$entitet instanceof stdClass || $entitet->sifra != true) {
+            header('location: ' . App::config('url') . 'nogometas');
+        }
+
+        if (isset($_POST['novi']) && $_POST['novi'] === '0' ) {
+            $_POST['sifra'] = $sifra;
+            Odjeca::update($_POST);
+            header('location: ' . App::config('url') . 'nogometas');
             return;
+        }
+    
+
+        $this->detalji($entitet,$klubovi,$this->poruka);
         }
 
 
@@ -55,7 +71,7 @@ class NogometasController extends AutorizacijaController
     
         if($this->kontrola()){
             Nogometas::update((array)$this->entitet);
-            header('location: ' . App::config('url') . 'igrac');
+            header('location: ' . App::config('url') . 'nogometas');
             return;
         }
 
@@ -63,7 +79,7 @@ class NogometasController extends AutorizacijaController
             'e'=>$this->entitet,
             'poruka'=>$this->poruka
         ]); 
-        $this->detalji($this->entitet,$klub,$this->poruka);
+        $this->detalji($this->entitet,$klubovi,$this->poruka);
     }
 
 
@@ -76,13 +92,13 @@ private function detalji($klubovi,$e,$poruka)
     ]);
 } 
 
-private function ucitajKlub()
+private function ucitajKlubove()
 {
-    $nba_teams = [];
-    $n = new stdClass();
-    $n->sifra=0;
-    $n->naziv='Odaberi klub';
-    $klubovi[]=$n;
+    $klubovi = [];
+    $k = new stdClass();
+    $k->sifra=0;
+    $k->ime_kluba='Odaberi klub';
+    $klubovi[]=$k;
     foreach(Klub::read() as $klub){
         $klubovi[]=$klub;
     }
